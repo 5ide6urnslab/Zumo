@@ -24,7 +24,7 @@ https://github.com/5ide6urnslab/Zumo
 An example project is provided in the **/example/** folder.
 <br>
 ##### ZumoForEnso
-This example is the Karesansui using Zumo. We are currently developing that.
+This example is the Karesansui I using Zumo. We are currently developing that.
 
 ## Reference
 (1) Magnetic Encoder Pair Kit Specifition  
