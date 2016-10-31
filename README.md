@@ -40,9 +40,6 @@ https://github.com/maniacbug/StandardCplusplus
 http://openframeworks.cc
 
 ## Copyright
-© 2015 All Rights Reserved.  Arduino is a trademark of Arduino SA.  
-   https://www.arduino.cc
-
 © 2001- All Rights Reserved. Zumo is a trademark of Pololu Corporation.  
    https://www.sparkfun.com
 
