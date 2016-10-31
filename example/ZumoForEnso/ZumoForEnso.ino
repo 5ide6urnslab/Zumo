@@ -40,10 +40,6 @@
 #include "zumo_message_id.h"
 #include <MagneticEncoder.h>
 
-#if 0
-#include <L3G.h>
-#endif
-
 
 using namespace std;
 using namespace ZumoMessageIds;
