@@ -28,6 +28,7 @@ This example is the work "Karesansui I" using Zumo. We are currently developing 
 
 ##### RobotSimuLink
 This example "RobotSimuLink" control the motor of Zumo and get sensors data by openframeworks v080. 
+<img class="photo" src="https://github.com/5ide6urnslab/Zumo/blob/master/resource/RobotSimuLink.png" width="340px" />
 
 ## Reference
 (1) Zumo v1.2  
