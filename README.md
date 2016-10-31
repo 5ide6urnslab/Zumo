@@ -1,4 +1,4 @@
-# Zumo v1.2
+# Zumo
 This repository is the Arduino library and Arduino sketch for the Zumo v1.2 that runs on Arduino UNO. We developing mbed library.  
 
 ## Description
