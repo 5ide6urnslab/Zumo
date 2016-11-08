@@ -2,8 +2,8 @@
 /*************************************************************************
  * File Name          : ZumoForEnso
  * Author             : Show Kawabata(5ide6urns lab)
- * Version            : v1.13
- * Date               : 09/30/2016
+ * Version            : v1.14
+ * Date               : 11/08/2016
  * Parts required     : Arduino UNO R3, Zumo v1.2 (Pololu), Servo Motor,
  *                      LSM303D Geomagnetic Sensor (ST Micro electronics),
  *                      Magnetic Encoder (Pololu), XBee ZB (Digi International)
@@ -29,6 +29,7 @@
  *                      09/16/2016 v1.11 Show Kawabata [Bug Fix] Overflow Encoder Value.
  *                      09/28/2016 v1.12 Show Kawabata [Bug Fix] Serial Receive Data Missed.
  *                      09/30/2016 v1.13 Show Kawabata [Refactoring] Structure Alignment.
+ *                      11/08/2016 v1.14 Show Kawabata [Refactoring] Common Message ID.
  **************************************************************************/
 
 #include <Arduino.h>                          // PlatformIO Input Completion.
@@ -37,12 +38,16 @@
 #include <Wire.h>
 #include <StandardCplusplus.h>                // uClibc++ for Arduino.
 #include <vector>
-#include "zumo_message_id.h"
+#include "message_id.h"
 #include <MagneticEncoder.h>
+
+#if 0
+#include <L3G.h>
+#endif
 
 
 using namespace std;
-using namespace ZumoMessageIds;
+using namespace MessageIds;
 
 
 //#define SERIAL_DEBUG_ENABLED                // For Debug.
@@ -250,13 +255,14 @@ void setup(){
  *
  *  @param[in]  void
  *  @return     void
- *  @version    v1.08
+ *  @version    v1.14
  *  @date       05/17/2016 v1.00 Create on.
  *              05/18/2016 v1.01 [New func] Drive Mode.
  *              08/30/2016 v1.03 [New func] Sensor Mode.
  *              09/01/2016 v1.04 [Change Spec] Message ID.
  *              09/05/2016 v1.06 [Bug Fix] Motor PWM Range.
  *              09/15/2016 v1.08 [Change Spec] Reset Encoder Count.
+ *              11/08/2016 v1.14 [Refactoring] Common Message ID.
  ***********************************************************************/
 void loop(){
 
@@ -280,7 +286,7 @@ void loop(){
   /**********************************
    * Control Status.(Start/Stop)
    **********************************/
-  if(_pt._id == kZumoMsgIdStartStatus){
+  if(_pt._id == kMsgIdStartStatus){
 
     /**********************************
      * Stop Status.
@@ -300,7 +306,7 @@ void loop(){
   /**********************************
    * Drive.
    **********************************/
-  else if (_pt._id == kZumoMsgIdDriveVelocity){
+  else if (_pt._id == kMsgIdDriveVelocity){
 
     _pt._driveL = map(_pt._driveL, -400, 400, -255, 255);
     _pt._driveR = map(_pt._driveR, -400, 400, -255, 255);
@@ -332,10 +338,11 @@ void loop(){
  *
  *  @param[in]  void
  *  @return     result   the Recieve Status.(SUCCESS:true / FAILURE:false)
- *  @version    v1.12
+ *  @version    v1.14
  *  @date       08/30/2016 v1.03 [New func] Sensor Mode.
  *              09/01/2016 v1.04 [Change Spec] Message ID.
  *              09/28/2016 v1.12 [Bug Fix] Serial Receive Data Missed.
+ *              11/08/2016 v1.14 [Refactoring] Common Message ID.
  **********************************************************************/
 bool recieveData(){
 
@@ -371,7 +378,7 @@ bool recieveData(){
       /**********************************
        * [Data] Drive Velocity.
        **********************************/
-      if(id_ == kZumoMsgIdDriveVelocity){
+      if(id_ == kMsgIdDriveVelocity){
 
         /**********************************
          * Right Motor Velocity.
@@ -423,7 +430,7 @@ bool recieveData(){
       /**********************************
        * [Data] Drive Status.
        **********************************/
-      else if(id_ == kZumoMsgIdStartStatus){
+      else if(id_ == kMsgIdStartStatus){
 
         delay(10);
         msb_ = Serial.read();
@@ -455,7 +462,7 @@ bool recieveData(){
       /**********************************
        * [Data] Sensor Status.
        **********************************/
-      else if(id_ == kZumoMsgIdSensingStatus){
+      else if(id_ == kMsgIdSensingStatus){
 
         delay(10);
         msb_ = Serial.read();
@@ -621,10 +628,11 @@ void sendData(unsigned char id, short value[], size_t length){
  *
  *  @param[in]  void
  *  @return     void
- *  @version    v1.12
+ *  @version    v1.14
  *  @date       08/30/2016 v1.03 [New func] Sensor Mode.
  *              09/01/2016 v1.04 [Change Spec] Message ID.
  *              09/28/2016 v1.12 [Bug Fix] Serial Receive Data Missed.
+ *              11/08/2016 v1.14 [Refactoring] Common Message ID.
  **********************************************************************/
 void sendGeomagneticSensor(){
 
@@ -644,7 +652,7 @@ void sendGeomagneticSensor(){
    *    (Total byte number of array) / (1 element size) = array size
    */
 
-  sendData(kZumoMsgIdGeoMagnetism, compass_,
+  sendData(kMsgIdGeoMagnetism, compass_,
            sizeof(compass_) / sizeof(compass_[0]));
 
   return;
@@ -656,10 +664,11 @@ void sendGeomagneticSensor(){
  *
  *  @param[in]  void
  *  @return     void
- *  @version    v1.12
+ *  @version    v1.14
  *  @date       09/12/2016 v1.07 [New func] Magnetic Encoder.
  *              09/15/2016 v1.09 [Change Spec] Message ID.
  *              09/28/2016 v1.12 [Bug Fix] Serial Receive Data Missed.
+ *              11/08/2016 v1.14 [Refactoring] Common Message ID.
  **********************************************************************/
 void sendMagneticEncoder(){
 
@@ -668,7 +677,7 @@ void sendMagneticEncoder(){
   encoder_[0] = _rightCount;
   encoder_[1] = _leftCount;
 
-  sendData(kZumoMsgIdMotorEncoder, encoder_,
+  sendData(kMsgIdMotorEncoder, encoder_,
            sizeof(encoder_) / sizeof(encoder_[0]));
 
   return;
