@@ -44,8 +44,8 @@ https://github.com/maniacbug/StandardCplusplus
 http://openframeworks.cc
 
 ## Copyright
-© 2001- All Rights Reserved. Zumo is a trademark of Pololu Corporation.  
-   https://www.sparkfun.com
+© 2001 Pololu Corporation All Rights Reserved.  
+   https://www.pololu.com
 
 ## License
 ##### About this manual and image files.
