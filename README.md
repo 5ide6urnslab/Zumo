@@ -27,7 +27,7 @@ An example project is provided in the **/example/** folder.
 This example is the work "Karesansui I" using Zumo. We are currently developing that.
 
 ##### RobotSimuLink
-This example "RobotSimuLink" control the motor of Zumo and get sensors data by openframeworks v080. You must add ofxGui and ofxXmlSettings, ofxCsv as addon.  
+This example "RobotSimuLink" control the motor of Zumo and get sensors data by openFrameworks v0.80. You must add ofxGui and ofxXmlSettings, ofxCsv as addon.  
 <img class="photo" src="https://github.com/5ide6urnslab/Zumo/blob/master/resource/RobotSimuLink.png" width="340px" />
 
 ## Reference
@@ -40,7 +40,7 @@ https://www.pololu.com/product/3081
 (3) uClibc++ for Arduino  
 https://github.com/maniacbug/StandardCplusplus
 
-(4) openframeworks  
+(4) openFrameworks  
 http://openframeworks.cc
 
 ## Copyright
