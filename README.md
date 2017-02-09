@@ -58,4 +58,4 @@ Released under the MIT license. http://opensource.org/licenses/mit-license.php
 #####Karesansui I:
 
 Electronics:   [Show Kawabata](http://cargocollective.com/dum6sen5e) (5ide6urns lab)  
-Electronics:   Shingo Masui(5ide6urns lab)
+Electronics:   Shingo Masui (5ide6urns lab)
